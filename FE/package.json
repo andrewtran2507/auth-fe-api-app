@@ -1,0 +1,103 @@
+{
+  "name": "react-web-app-demo",
+  "version": "0.1.0",
+  "description": "Web App Demo With React JS, MUI, TypeScript",
+  "private": true,
+  "homepage": "./",
+  "keywords": [
+    "emotion",
+    "es6",
+    "eslint",
+    "hooks",
+    "jest",
+    "mui",
+    "react",
+    "roboto",
+    "router",
+    "sass",
+    "spa",
+    "typescript",
+    "vscode"
+  ],
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.14.8",
+    "@mui/lab": "^5.0.0-alpha.143",
+    "@mui/material": "^5.14.8",
+    "@mui/x-date-pickers": "^6.13.0",
+    "@mui/x-date-pickers-pro": "^6.13.0",
+    "axios": "^1.6.5",
+    "moment": "^2.29.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.15.0",
+    "react-scripts": "5.0.1",
+    "uuid": "^9.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.50",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@types/uuid": "^9.0.4",
+    "env-cmd": "^10.1.0",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.3",
+    "react-docgen-typescript-plugin": "^1.0.5",
+    "sass": "^1.66.1",
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard-scss": "^11.0.0",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "init": "npm ci --loglevel=error --no-audit --no-fund",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src/",
+    "lint:f": "eslint --fix --ext .js,.jsx,.ts,.tsx src/",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "!src/**/*.stories.tsx",
+      "!src/index.tsx",
+      "!src/react-app-env.d.ts",
+      "!src/util/web-vitals.ts",
+      "!src/app/index.tsx"
+    ],
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs",
+      "@bundled-es-modules": "@bundled-es-modules/statuses/index-cjs.cjs"
+    },
+    "transformIgnorePatterns": []
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "npm": ">=8.0.0 <10.0.0",
+    "node": ">=18.0.0 <20.0.0"
+  }
+}

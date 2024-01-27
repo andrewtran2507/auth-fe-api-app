@@ -1,0 +1,15 @@
+{
+  "name": "docker-local",
+  "version": "1.0.0",
+  "description": "Docker Local environment with a database, a back-end and a front-end application.",
+  "scripts": {
+    "build:back": "docker-compose build nestjs-app",
+    "build:front": "docker-compose build react-app",
+    "start:db": "docker-compose up mysql-db",
+    "start:back": "docker-compose up nestjs-app --renew-anon-volumes",
+    "start:front": "docker-compose up react-app --renew-anon-volumes",
+    "clean": "docker-compose down -v"
+  },
+  "author": "Andrew.Tran",
+  "license": "ISC"
+}
