@@ -16,8 +16,20 @@ Feature list handles
     - Sign-up
     - Sign-out
 
-###$ Node v18.14.0
+### Node v18.14.0
 
+### Setup
+- git clone https://github.com/andrewtran2507/auth-fe-api-app.git
+- cd auth-fe-api-app
+- npm run start:db
+- npm run build:back
+- npm run start:back
+- npm run build:front
+- npm run start:front
+### FE from docker
+- http://localhost:5556/log-in
+### API from docker
+- http://localhost:3307/api 
 ## Web App
 ![Screenshot](demo/sign-up.png?raw=true)
 ![Screenshot](demo/login-page.png?raw=true)

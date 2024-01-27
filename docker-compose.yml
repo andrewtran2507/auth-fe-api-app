@@ -9,20 +9,20 @@ services:
     image: mysql:8.0
     container_name: mysql-db
     command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    restart: unless-stopped
     env_file: ./.env
     environment:
       MYSQL_DATABASE: $MYSQL_DB
       MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
-      MYSQL_ROOT_USER: $MYSQL_USER
-      MYSQL_ROOT_HOST: $MYSQL_HOST
-      MYSQL_USER: abc
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_USER: 'my-root'
+      # MYSQL_ROOT_USER: $MYSQL_USER
+      # MYSQL_ROOT_HOST: $MYSQL_HOST
+      # MYSQL_PASSWORD: $MYSQL_PASSWORD
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
-      - mysql-volume:/var/lib/mysql:rw
-      - ./mysql-db:/docker-entrypoint-initdb.d/
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - default
 
@@ -32,6 +32,8 @@ services:
       context: ./API
       dockerfile: Dockerfile
       target: install-dependencies
+    depends_on:
+      - mysql-db
     command: npm run start:dev
     restart: unless-stopped 
     env_file:
@@ -43,6 +45,7 @@ services:
       - MYSQL_HOST=$MYSQL_HOST
       - MYSQL_DB=$MYSQL_DB
       - MYSQL_USER=$MYSQL_USER
+      - MYSQL_ROOT_USER=$MYSQL_ROOT_USER
       - MYSQL_PASSWORD=$MYSQL_PASSWORD
       - MYSQL_PORT=$MYSQLDB_DOCKER_PORT
       - MYSQL_SYNC=$MYSQL_SYNC
@@ -57,7 +60,7 @@ services:
       - ./src:/user/src/app/src
     ports:
       - $NESTJS_APP_LOCAL_PORT:$NESTJS_APP_DOCKER_PORT
-      - "9229:9229"
+      # - "9229:9229"
     networks:
       - default
       
@@ -66,7 +69,7 @@ services:
     build:
       context: ./FE
       dockerfile: Dockerfile
-      target: builder
+      # target: builder
     command: npm run start
     restart: unless-stopped
     env_file:
@@ -74,16 +77,19 @@ services:
     ports:
       - $REACT_JS_APP_LOCAL_PORT:$REACT_JS_APP_DOCKER_PORT
     environment:
+      - PORT=$PORT
       - SASS_PATH=$SASS_PATH
       - REACT_APP_PACKAGE_NAME=$REACT_APP_PACKAGE_NAME
       - REACT_APP_BASE_API_URL=$REACT_APP_BASE_API_URL
     stdin_open: true
     tty: true
     volumes:
-      - .:/usr/src/fe
-      - /usr/src/fe/node_modules
+      - './:/app'
+      - '/app/node_modules'
     networks:
       - default
 
 volumes: 
-  mysql-volume:
+  db:
+    driver: local
+  # mysql-volume:
